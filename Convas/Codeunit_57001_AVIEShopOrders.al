@@ -39,7 +39,7 @@ codeunit 57001 "AVI E-Shop Orders"
 
         tmpSalesHeader.Init();
         tmpSalesHeader."Document Type" := tmpSalesHeader."Document Type"::Order;
-        tmpSalesHeader."No." := 'AVI-TEMP';
+        tmpSalesHeader."No." := 'AVI-TEMP';//todo
         tmpSalesHeader.SuspendStatusCheck(true);
         tmpSalesHeader.SetHideValidationDialog(true);
         tmpSalesHeader.SetHideCreditCheckDialogue(true);
