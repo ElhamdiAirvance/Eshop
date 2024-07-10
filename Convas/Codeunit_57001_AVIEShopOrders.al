@@ -34,12 +34,14 @@ codeunit 57001 "AVI E-Shop Orders"
         tmpSalesHeader: record "Sales Header" temporary;
         tmpSalesLine: record "Sales Line" temporary;
         tmpSalesCommentLine: record "Sales Comment Line" temporary;
+        NoSeriesMgt: Codeunit NoSeriesMgt;
     begin
         // do a dry run on temporary tables
 
         tmpSalesHeader.Init();
         tmpSalesHeader."Document Type" := tmpSalesHeader."Document Type"::Order;
         tmpSalesHeader."No." := 'AVI-TEMP';//todo
+
         tmpSalesHeader.SuspendStatusCheck(true);
         tmpSalesHeader.SetHideValidationDialog(true);
         tmpSalesHeader.SetHideCreditCheckDialogue(true);
@@ -102,6 +104,9 @@ codeunit 57001 "AVI E-Shop Orders"
         salesHeader."No." := '';
         salesHeader.Init();
         salesHeader."Document Type" := salesHeader."Document Type"::Order;
+        //REH 10072024 start
+        NoSeriesMgt.InitSeries('COMSHOP', '', 0D, salesHeader."No.", salesHeader."No. Series");
+        //REH 10072024 start
         salesHeader.validate("Sell-to Customer No.", eShopOrderHeader."Sell-to Customer No.");
         salesHeader.validate("Sell-to Contact", eShopOrderHeader."Sell-to Contact");
         salesHeader.validate("Sell-to Phone No.", eShopOrderHeader."Sell-to Phone No.");
